@@ -21,6 +21,10 @@ El proyecto implementa un sistema inteligente en la nube que pronostica y estima
 
 El sistema cruza en tiempo real las variables meteorológicas de la API **Open-Meteo** (temperatura, volumen de lluvia, probabilidad de precipitación, radiación UV) con un **modelo matemático de capacidad de carga turística** calibrado con estadísticas oficiales regionales y el calendario festivo peruano (San Juan, Fiestas Patrias, fines de semana).
 
+### 🎥 Video Demostrativo de Funcionamiento
+El video que demuestra la operatividad del sistema, la consulta meteorológica en tiempo real, el cálculo de aforo y la base de datos se encuentra disponible en el repositorio:
+▶️ **[Ver Video de Funcionamiento (funcionamiento.mp4)](./funcionamiento.mp4)**
+
 ---
 
 ## 🐳 2. Despliegue en 1 Solo Paso con Docker y Docker Compose
