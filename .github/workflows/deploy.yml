@@ -85,14 +85,12 @@ jobs:
               git pull origin main
             fi
 
-            echo "🐳 Asegurando docker-buildx en EC2..."
-            if [ ! -f /usr/local/lib/docker/cli-plugins/docker-buildx ]; then
-              sudo curl -SL https://github.com/docker/buildx/releases/latest/download/buildx-v0.21.1.linux-amd64 -o /usr/local/lib/docker/cli-plugins/docker-buildx
-              sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
-            fi
+            echo "🐳 Compilando imágenes con motor nativo de Docker..."
+            sudo docker build -t jacintillo-backend:latest ./backend
+            sudo docker build -t jacintillo-frontend:latest ./frontend
 
-            echo "🐳 Desplegando y actualizando Contenedores en caliente..."
-            sudo docker compose up -d --build
+            echo "🐳 Desplegando y actualizando Contenedores en caliente (Zero Downtime)..."
+            sudo docker compose up -d --no-build
 
-            echo "✅ Despliegue completado exitosamente en AWS EC2."
+            echo "✅ Verificando estado de los servicios..."
             sudo docker compose ps
