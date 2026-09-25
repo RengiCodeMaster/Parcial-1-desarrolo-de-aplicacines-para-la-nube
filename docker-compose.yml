@@ -1,0 +1,67 @@
+# Docker Compose para Arquitectura Desacoplada: Frontend (React/Nginx) + Backend (Express) + DB (PostgreSQL)
+# Generado por DeployAgent según specs/08-docker-and-database-spec.md
+
+services:
+  # 1. Base de Datos Relacional PostgreSQL con Persistencia
+  db:
+    image: postgres:15-alpine
+    container_name: jacintillo-db
+    restart: always
+    environment:
+      POSTGRES_DB: jacintillo_db
+      POSTGRES_USER: jacintillo_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-jacintillo_secret_cloud_2026}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - jacintillo-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jacintillo_user -d jacintillo_db"]
+      interval: 8s
+      timeout: 4s
+      retries: 5
+
+  # 2. Microservicio Backend (Node.js / Express API REST)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: jacintillo-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      DATABASE_URL: postgres://jacintillo_user:${DB_PASSWORD:-jacintillo_secret_cloud_2026}@db:5432/jacintillo_db
+      JWT_SECRET: ${JWT_SECRET:-jacintillo_production_secret_key_cloud_2026}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - jacintillo-net
+
+  # 3. Microservicio Frontend (React SPA servido con Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: jacintillo-frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - jacintillo-net
+
+volumes:
+  db_data:
+    name: jacintillo_db_data
+
+networks:
+  jacintillo-net:
+    driver: bridge
+    name: jacintillo_network

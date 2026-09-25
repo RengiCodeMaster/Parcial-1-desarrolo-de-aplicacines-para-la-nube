@@ -1,0 +1,31 @@
+{
+  "name": "aguas-sulfurosas-jacintillo-cloud",
+  "version": "1.0.0",
+  "description": "Sistema Predictivo de Afluencia Turística Basado en Clima para Aguas Sulfurosas de Jacintillo (Tingo María) - Spec & Agent Driven",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "tingo-maria",
+    "aguas-sulfurosas",
+    "weather-prediction",
+    "cloud-computing",
+    "open-meteo",
+    "docker",
+    "aws"
+  ],
+  "author": "Juan & AI Agents Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5"
+  }
+}
