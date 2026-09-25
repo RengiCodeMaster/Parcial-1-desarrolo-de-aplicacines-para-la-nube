@@ -107,10 +107,17 @@ async function initDatabaseTables() {
       factors_json JSONB NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+    -- Asegurar cuentas demo con hashes bcrypt válidos
+    INSERT INTO users (email, password_hash, full_name, role)
+    VALUES 
+      ('admin@tingomaria.gob.pe', '$2a$10$nwBtRkAlNsVb33ubC52dxuq4dAc34H6we75TMfc4Fr9hwJcqBiYXy', 'Administrador Jacintillo', 'ADMIN'),
+      ('turista@demo.com', '$2a$10$VUxgc4waeHf4bHtLEMzOuefEJWjdBMMZ4zAWYKBv2wjn/v1dMSOAK', 'Juan Turista', 'TURISTA')
+    ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash;
   `;
   try {
     await pool.query(ddl);
-    console.log('✅ [Database] Tablas e índices verificados en PostgreSQL.');
+    console.log('✅ [Database] Tablas, índices y cuentas demo verificados en PostgreSQL.');
   } catch (err) {
     console.error('❌ [Database] Error creando tablas en PostgreSQL:', err.message);
   }

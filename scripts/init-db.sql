@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS predictions_cache (
 -- Contraseña de turista@demo.com: turista123
 INSERT INTO users (email, password_hash, full_name, role)
 VALUES 
-  ('admin@tingomaria.gob.pe', '$2b$10$EP3tYq560N4L.j9Kqm0bKu42r8fG0KzJ3aMbmhCgU5T7sP0N3U9eK', 'Administrador Jacintillo', 'ADMIN'),
-  ('turista@demo.com', '$2b$10$EP3tYq560N4L.j9Kqm0bKu42r8fG0KzJ3aMbmhCgU5T7sP0N3U9eK', 'Juan Turista', 'TURISTA')
-ON CONFLICT (email) DO NOTHING;
+  ('admin@tingomaria.gob.pe', '$2a$10$nwBtRkAlNsVb33ubC52dxuq4dAc34H6we75TMfc4Fr9hwJcqBiYXy', 'Administrador Jacintillo', 'ADMIN'),
+  ('turista@demo.com', '$2a$10$VUxgc4waeHf4bHtLEMzOuefEJWjdBMMZ4zAWYKBv2wjn/v1dMSOAK', 'Juan Turista', 'TURISTA')
+ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
 -- Visita de Demostración
 INSERT INTO scheduled_visits (user_id, visit_date, expected_visitors, weather_notes)
