@@ -85,6 +85,12 @@ jobs:
               git pull origin main
             fi
 
+            echo "🐳 Asegurando docker-buildx en EC2..."
+            if [ ! -f /usr/local/lib/docker/cli-plugins/docker-buildx ]; then
+              sudo curl -SL https://github.com/docker/buildx/releases/latest/download/buildx-v0.21.1.linux-amd64 -o /usr/local/lib/docker/cli-plugins/docker-buildx
+              sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
+            fi
+
             echo "🐳 Desplegando Contenedores (Frontend React + Backend Node + PostgreSQL)..."
             docker compose down --remove-orphans || true
             docker compose up -d --build

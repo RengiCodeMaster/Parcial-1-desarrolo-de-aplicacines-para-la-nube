@@ -24,6 +24,7 @@ services:
 
   # 2. Microservicio Backend (Node.js / Express API REST)
   backend:
+    image: jacintillo-backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -44,6 +45,7 @@ services:
 
   # 3. Microservicio Frontend (React SPA servido con Nginx)
   frontend:
+    image: jacintillo-frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
