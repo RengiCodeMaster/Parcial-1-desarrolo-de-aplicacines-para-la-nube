@@ -1,5 +1,6 @@
 # 🌿 Sistema Predictivo de Afluencia Turística - Aguas Sulfurosas de Jacintillo
 
+[![Live Demo](https://img.shields.io/badge/Demo%20Online-AWS%20EC2-brightgreen)](http://3.235.49.15)
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue?logo=github-actions)](.github/workflows/deploy.yml)
 [![Docker](https://img.shields.io/badge/Docker-Multi--Container-2496ED?logo=docker)](specs/08-docker-and-database-spec.md)
 [![Database](https://img.shields.io/badge/Database-PostgreSQL%20%2F%20Persistent-336791?logo=postgresql)](specs/08-docker-and-database-spec.md)
