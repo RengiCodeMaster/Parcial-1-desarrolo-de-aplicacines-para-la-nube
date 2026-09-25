@@ -75,7 +75,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "🚀 Iniciando despliegue de stack desacoplado en AWS EC2..."
-            mkdir -p /var/www/jacintillo-app
+            sudo mkdir -p /var/www/jacintillo-app
+            sudo chown -R $USER:$USER /var/www/jacintillo-app
             cd /var/www/jacintillo-app
             
             if [ ! -d ".git" ]; then
