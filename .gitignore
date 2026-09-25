@@ -26,6 +26,7 @@ backend/.env
 frontend/.env
 
 # Editor & OS files
+*.pem
 .vscode/
 .idea/
 *.suo
